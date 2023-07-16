@@ -48,12 +48,12 @@ import com.example.cupcake.ui.components.FormattedPriceLabel
  */
 @Composable
 fun SelectOptionScreen(
+    modifier: Modifier = Modifier,
     subtotal: String,
     options: List<String>,
     onSelectionChanged: (String) -> Unit = {},
     onCancelButtonClicked: () -> Unit = {},
-    onNextButtonClicked: () -> Unit = {},
-    modifier: Modifier = Modifier
+    onNextButtonClicked: () -> Unit = {}
 ) {
     var selectedValue by rememberSaveable { mutableStateOf("") }
 
@@ -109,10 +109,10 @@ fun SelectOptionScreen(
                 Text(stringResource(R.string.cancel))
             }
             Button(
-                modifier = Modifier.weight(1f),
                 // the button is enabled when the user makes a selection
                 enabled = selectedValue.isNotEmpty(),
-                onClick = onNextButtonClicked
+                onClick = onNextButtonClicked,
+                modifier = Modifier.weight(1f),
             ) {
                 Text(stringResource(R.string.next))
             }
