@@ -1,17 +1,17 @@
 package test
 
 import androidx.activity.ComponentActivity
-import androidx.compose.ui.platform.LocalContext
+
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.text.intl.Locale
+
 import com.example.cupcake.ui.SelectOptionScreen
 import com.example.cupcake.R
-import com.example.cupcake.ui.OrderSummaryScreen
+
 import com.example.cupcake.ui.StartOrderScreen
 import org.junit.Rule
 import org.junit.Test
