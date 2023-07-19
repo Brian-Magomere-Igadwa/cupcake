@@ -11,6 +11,7 @@ import androidx.compose.ui.test.performClick
 
 import com.example.cupcake.ui.SelectOptionScreen
 import com.example.cupcake.R
+import com.example.cupcake.ui.OrderSummaryScreen
 
 import com.example.cupcake.ui.StartOrderScreen
 import org.junit.Rule
@@ -19,6 +20,15 @@ import org.junit.Test
 class CupcakeOrderScreenTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
+
+    private val fakeOrderUiState = OrderUiState(
+        quantity = 6,
+        flavor = "Vanilla",
+        date = "Wed Jul 21",
+        price = "$100",
+        pickupOptions = listOf()
+    )
+
 
     @Test
     fun selectOptionScreen_verifyContent() {
@@ -74,15 +84,26 @@ class CupcakeOrderScreenTest {
 
     }
 
-//    @Test
-//    fun summaryScreen_verifyContent() {
-//        composeTestRule.setContent {
-//            OrderSummaryScreen(
-//                orderUiState = ,
-//                onCancelButtonClicked = { /*TODO*/ },
-//                onSendButtonClicked =
-//            )
-//        }
-//    }
+    @Test
+    fun summaryScreen_verifyContentDisplay() {
+        // When Summary Screen is loaded
+        composeTestRule.setContent {
+            OrderSummaryScreen(
+                orderUiState = fakeOrderUiState,
+                onCancelButtonClicked = {},
+                onSendButtonClicked = { _, _ -> },
+            )
+        }
+
+        // Then the UI is updated correctly.
+        composeTestRule.onNodeWithText(fakeOrderUiState.flavor).assertIsDisplayed()
+        composeTestRule.onNodeWithText(fakeOrderUiState.date).assertIsDisplayed()
+        composeTestRule.onNodeWithText(
+            composeTestRule.activity.getString(
+                R.string.subtotal_price,
+                fakeOrderUiState.price
+            )
+        ).assertIsDisplayed()
+    }
 
 }
